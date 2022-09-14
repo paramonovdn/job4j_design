@@ -49,6 +49,5 @@ class BoxTest {
     void getArea1() {
         double area1 = box1.getArea();
         assertThat(area1).isEqualTo(173.20d,withPrecision(0.01d));
-
     }
 }
