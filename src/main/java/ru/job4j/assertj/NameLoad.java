@@ -10,11 +10,11 @@ public class NameLoad {
     private final Map<String, String> values = new HashMap<>();
 
     public void parse(String... names) {
-        if (names.length == 0) { // длина строки = 0 выкидываем ошибку
+        if (names.length == 0) {
             throw new IllegalArgumentException("Names array is empty");
         }
-        values.putAll(Arrays.stream(names)//кладем переменные в массив
-                .map(String::trim)// удаляем пробелы в начале и конце
+        values.putAll(Arrays.stream(names)
+                .map(String::trim)
                 .filter(this::validate)
                 .map(s -> s.split("=", 2))
                 .collect(Collectors.toMap(
@@ -25,23 +25,23 @@ public class NameLoad {
     }
 
     private boolean validate(String name) {
-        if (!name.contains("=")) { // содержит ли name подстроку "="
+        if (!name.contains("=")) {
             throw new IllegalArgumentException(
                     String.format("this name: %s does not contain the symbol \"=\"", name));
         }
-        if (name.startsWith("=")) { // начинается ли name с "="
+        if (name.startsWith("=")) {
             throw new IllegalArgumentException(
                     String.format("this name: %s does not contain a key", name));
         }
-        if (name.indexOf("=") == name.length() - 1) { // последнее вхождение
+        if (name.indexOf("=") == name.length() - 1) {
             throw new IllegalArgumentException(
                     String.format("this name: %s does not contain a value", name));
         }
-        return true;   // иначе возвращаем true
+        return true;
     }
 
     public Map<String, String> getMap() {
-        if (values.isEmpty()) {   // если мапа пустая, то выбрасываем ошибку, иначе возвращаем мапу
+        if (values.isEmpty()) {
             throw new IllegalStateException("collection contains no data");
         }
         return values;
