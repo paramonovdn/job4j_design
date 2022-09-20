@@ -19,7 +19,7 @@ public class MatrixIt implements Iterator<Integer> {
                column = 0;
            }
            row++;
-           if(row >= data.length) {
+           if (row >= data.length) {
                return false;
            }
        }
