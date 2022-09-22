@@ -11,21 +11,15 @@ public class MatrixIt implements Iterator<Integer> {
     public MatrixIt(int[][] data) {
         this.data = data;
     }
-
     @Override
     public boolean hasNext() {
-       while ((data[row].length == 0) | (column >= data[row].length)) {
-           if (row == data.length - 1) {
-               break;
-           }
-           row++;
-           column = 0;
-       }
-
-        return ((column < data[row].length) & (row < data.length));
+        while (row < data.length && column == data[row].length) {
+            row++;
+            column = 0;
+        }
+        return row < data.length;
 
     }
-
     @Override
     public Integer next() {
         if (!hasNext()) {
