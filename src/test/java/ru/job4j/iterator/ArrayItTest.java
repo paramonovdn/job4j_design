@@ -32,7 +32,6 @@ class ArrayItTest {
         ArrayIt it = new ArrayIt(
                 new int[] {}
         );
-     //   assertThat(it.next()).isEqualTo(1);
         it.next();
     }
 
