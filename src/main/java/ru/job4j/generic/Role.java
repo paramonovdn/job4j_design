@@ -1,6 +1,6 @@
 package ru.job4j.generic;
 
-public class Role extends User{
+public class Role extends User {
 
     private final String proffesion;
 
