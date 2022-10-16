@@ -7,21 +7,16 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     private T[] container;
     private int size;
     private int modCount;
-    private int expectedModCount;
-    public int index;
-    int i;
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
     @Override
     public void add(T value) {
-       if (i >= size()) {
+       if (size >= container.length) {
            enlargeArray();
        }
-       container[i] = value;
-       i++;
+       container[size++] = value;
        modCount++;
-       size++;
     }
 
     @Override
@@ -39,9 +34,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 index + 1,
                 container,
                 index,
-                size() - index - 1
+                size - index - 1
         );
-        container[size() - 1] = null;
+        container[size - 1] = null;
         modCount++;
         size--;
         return remoteElemenr;
@@ -49,7 +44,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, size());
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
@@ -67,14 +62,15 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        int expectedModCount = modCount;
         return new Iterator<T>() {
+            int expectedModCount = modCount;
+            int index = 0;
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return index < size();
+                return index < size;
             }
             @Override
             public T next() {
