@@ -6,8 +6,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     private T[] container;
     private int size;
-    private int modCount = 0;
-    private int expectedModCount = 0;
+    private int modCount;
+    private int expectedModCount;
     public int index;
     int i;
     public SimpleArrayList(int capacity) {
