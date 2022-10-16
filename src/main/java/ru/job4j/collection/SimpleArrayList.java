@@ -59,7 +59,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private void enlargeArray() {
-        if (container.length == 0 ) {
+        if (container.length == 0) {
             container = Arrays.copyOf(container, 1);
         }
         container = Arrays.copyOf(container, container.length * 2);
