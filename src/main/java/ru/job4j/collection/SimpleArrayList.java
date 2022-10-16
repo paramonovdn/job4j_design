@@ -1,11 +1,11 @@
 package ru.job4j.collection;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class SimpleArrayList<T> implements SimpleList<T> {
 
     private T[] container;
+    private int size;
     private int modCount = 0;
     private int expectedModCount = 0;
     public int index;
@@ -17,30 +17,25 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public void add(T value) {
-       if (i < size()) {
-           container[i] = value;
-           i++;
-       } else {
+       if (i >= size()) {
            enlargeArray();
-           container[i] = value;
-           i++;
        }
+       container[i] = value;
+       i++;
        modCount++;
+       size++;
     }
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size());
-        T setElements = container[index];
+        T setElements = get(index);
         container[index] = newValue;
-        modCount++;
         return setElements;
     }
 
     @Override
     public T remove(int index) {
-       Objects.checkIndex(index, size());
-       T remoteElemenr = container[index];
+       T remoteElemenr = get(index);
         System.arraycopy(
                 container,
                 index + 1,
@@ -50,6 +45,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         );
         container[size() - 1] = null;
         modCount++;
+        size--;
         return remoteElemenr;
     }
 
@@ -61,16 +57,13 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public int size() {
-        int count = 0;
-        for (int i = 0; i < container.length; i++) {
-            if (container[i] != null) {
-                count++;
-            }
-        }
-        return count;
+       return size;
     }
 
-    public void enlargeArray (){
+    private void enlargeArray() {
+        if (container.length == 0 ) {
+            container = Arrays.copyOf(container, 1);
+        }
         container = Arrays.copyOf(container, container.length * 2);
     }
 
@@ -78,19 +71,17 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     public Iterator<T> iterator() {
         int expectedModCount = modCount;
         return new Iterator<T>() {
-
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return index < size();
             }
-
             @Override
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
                 }
                 return container[index++];
             }
