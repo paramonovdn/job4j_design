@@ -10,11 +10,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     private int expectedModCount = 0;
     public int index;
     int i;
-
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
-
     @Override
     public void add(T value) {
        if (i >= size()) {
