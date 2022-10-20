@@ -12,7 +12,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private Node<E> last;
     private int size;
     private int modCount;
-
     @Override
     public void add(E value) {
         final Node<E> l = last;
@@ -26,7 +25,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         size++;
         modCount++;
     }
-
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
@@ -38,7 +36,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         }
         return x.item;
     }
-
     @Override
     public Iterator<E> iterator() {
 
@@ -66,7 +63,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
             }
         };
     }
-
     private static class Node<E> {
         E item;
         Node<E> next;
