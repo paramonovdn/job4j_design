@@ -1,7 +1,4 @@
 package ru.job4j.collection;
-
-import ru.job4j.generics.Node;
-
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
