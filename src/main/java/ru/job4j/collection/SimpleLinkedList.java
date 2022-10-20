@@ -20,8 +20,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         last = newNode;
         if (l == null) {
             first = newNode;
-        }
-        else {
+        } else {
             l.next = newNode;
         }
         size++;
@@ -30,7 +29,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
     @Override
     public E get(int index) {
-        Objects.checkIndex(index,size);
+        Objects.checkIndex(index, size);
         Node<E> x = first;
         if (index < size) {
             for (int i = 0; i < index; i++) {
