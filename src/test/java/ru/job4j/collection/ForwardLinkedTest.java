@@ -36,11 +36,11 @@ class ForwardLinkedTest {
         assertThatThrownBy(linked::deleteFirst)
                 .isInstanceOf(NoSuchElementException.class);
     }
-
     @Test
     void whenMultiDelete() {
         linked.deleteFirst();
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next()).isEqualTo(2);
     }
+
 }
