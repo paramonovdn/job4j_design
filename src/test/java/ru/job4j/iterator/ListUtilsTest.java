@@ -45,7 +45,6 @@ class ListUtilsTest {
         ListUtils.replaceIf(input, x -> x % 1 == 0, 3);
         assertThat(input).hasSize(3).containsSequence(3, 3, 3);
     }
-
     @Test
     void whenRemoveAll() {
         input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
