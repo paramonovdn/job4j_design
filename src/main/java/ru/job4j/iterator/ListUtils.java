@@ -6,26 +6,16 @@ import java.util.function.Predicate;
 public class ListUtils {
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.nextIndex() == index) {
-                iterator.add(value);
-                break;
-            }
-            iterator.next();
-        }
+        ListIterator<T> iterator = list.listIterator(index);
+        iterator.add(value);
     }
+
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.nextIndex() - 1 == index) {
-                iterator.add(value);
-                break;
-            }
-            iterator.next();
-        }
+        ListIterator<T> iterator = list.listIterator(index + 1);
+        iterator.add(value);
     }
+
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
         ListIterator<T> iterator = list.listIterator();
         while (iterator.hasNext()) {
@@ -43,13 +33,17 @@ public class ListUtils {
         }
     }
     public static <T> void removeAll(List<T> list, List<T> elements) {
+        ListIterator<T> listIterator = list.listIterator();
         ListIterator<T> elementsIterator = elements.listIterator();
-        while (elementsIterator.hasNext()) {
-            ListIterator<T> listIterator = list.listIterator();
-            T currentElementIterator = elementsIterator.next();
-            while (listIterator.hasNext()) {
-                if (listIterator.next().equals(currentElementIterator)) {
+        T currentElementIterator = elementsIterator.next();
+        while (listIterator.hasNext()) {
+            if (listIterator.next().equals(currentElementIterator)) {
                     listIterator.remove();
+            }
+            if (!listIterator.hasNext()) {
+                if (elementsIterator.hasNext()) {
+                    currentElementIterator = elementsIterator.next();
+                    listIterator = list.listIterator();
                 }
             }
         }
