@@ -12,7 +12,6 @@ public class User {
         this.children = children;
         this.birthday = birthday;
     }
-
     public static void main(String[] args) {
         User user1 = new User("Stivie", 1, new GregorianCalendar(1990, 10, 20));
         User user2 = new User("Stivie", 1, new GregorianCalendar(1990, 10, 20));
