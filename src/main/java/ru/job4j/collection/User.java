@@ -35,4 +35,9 @@ public class User {
         System.out.println();
         System.out.printf("user2 - хешкод: %s, хеш: %s, бакет: %s", hashCode2, hash2, backet2);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
+    }
 }
