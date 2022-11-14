@@ -6,7 +6,6 @@ public class User {
     private String name;
     private int children;
     private Calendar birthday;
-
     public User(String name, int children, Calendar birthday) {
         this.name = name;
         this.children = children;
@@ -18,7 +17,6 @@ public class User {
         Map<User, Object> map = new HashMap<>(16);
         map.put(user1, new Object());
         map.put(user2, new Object());
-        String i = "";
         Iterator<Map.Entry<User, Object>> it = map.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<User, Object> pair = it.next();
