@@ -152,7 +152,7 @@ class SimpleMapTest {
     }
 
     @Test
-    void putAllColisiaIndex(){
+    void putAllColisiaIndex() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         assertThat(map.put(0, "0")).isTrue();
         assertThat(map.put(8, "8")).isFalse();
@@ -162,7 +162,7 @@ class SimpleMapTest {
     }
 
     @Test
-    void putAllColisiaIndex2(){
+    void putAllColisiaIndex2() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         assertThat(map.put(0, "0")).isTrue();
         assertThat(map.remove(0)).isTrue();
@@ -173,7 +173,7 @@ class SimpleMapTest {
     }
 
     @Test
-    void getNull(){
+    void getNull() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         assertThat(map.put(0, "0")).isTrue();
         assertThat(map.put(null, "0000")).isFalse();
@@ -182,7 +182,7 @@ class SimpleMapTest {
     }
 
     @Test
-    void getZero(){
+    void getZero() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         assertThat(map.put(null, "0000")).isTrue();
         assertThat(map.put(0, "0")).isFalse();
