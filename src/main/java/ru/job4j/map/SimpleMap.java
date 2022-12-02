@@ -54,7 +54,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private boolean keysCheck(K key1, K key2) {
         boolean result = false;
-        if ((key1 == null && key2 == null) || (key1.hashCode() == key2.hashCode() && key1.equals(key2))) {
+        if (Objects.hashCode(key1) == Objects.hashCode(key2) && Objects.equals(key1, key2)) {
             result = true;
         }
         return result;
@@ -65,11 +65,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         V result = null;
         int index = indexForFinal(key);
         if (table[index] != null) {
-           if ((key != null && table[index].key != null) || (key == null && table[index].key == null)) {
-               if (keysCheck(key, table[index].key)) {
-                   result = table[index].value;
-               }
-           }
+            if (keysCheck(key, table[index].key)) {
+                result = table[index].value;
+            }
         }
         return result;
     }
@@ -78,13 +76,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
         boolean result = false;
         int index = indexForFinal(key);
         if (table[index] != null) {
-            if ((key != null && table[index].key != null) || (key == null && table[index].key == null)) {
-                if (keysCheck(key, table[index].key)) {
-                    table[index] = null;
-                    modCount--;
-                    count--;
-                    result = true;
-                }
+            if (keysCheck(key, table[index].key)) {
+                table[index] = null;
+                modCount--;
+                count--;
+                result = true;
             }
         }
         return result;
