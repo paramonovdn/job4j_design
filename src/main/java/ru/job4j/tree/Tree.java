@@ -7,7 +7,6 @@ import java.util.Optional;
 public interface Tree<E> {
 
     boolean add(E parent, E child);
-    public void myPrint();
 
     Optional<Node<E>> findBy(E value);
 

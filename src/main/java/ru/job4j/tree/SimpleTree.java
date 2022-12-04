@@ -34,18 +34,4 @@ public class SimpleTree<E> implements Tree<E> {
         }
         return rsl;
     }
-
-    public void myPrint() {
-        Optional<Node<E>> rsl = Optional.empty();
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        Node<E> el = null;
-        while (!data.isEmpty()) {
-            while (!data.isEmpty()) {
-                el = data.poll();
-                System.out.println(el.value);
-            }
-            data.addAll((el.children));
-        }
-    }
 }
