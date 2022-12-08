@@ -36,20 +36,12 @@ public class SimpleTree<E> implements Tree<E> {
         return rsl;
     }
     public boolean isBinary() {
-        boolean result = true;
-        if (findByPredicate(eNode -> eNode.children.size() > 2).isPresent()) {
-            result = false;
-        }
-        return result;
+        return findByPredicate(eNode -> eNode.children.size() > 2).isEmpty();
     }
     @Override
     public Optional<Node<E>> findBy(E value) {
-        Optional<Node<E>> rsl = Optional.empty();
         Optional<Node<E>> resultFindByPredicate = findByPredicate(eNode -> eNode.value.equals(value));
-        if (!resultFindByPredicate.isEmpty()) {
-            rsl = Optional.of(resultFindByPredicate.get());
-        }
-        return rsl;
+        return  resultFindByPredicate.isPresent() ? resultFindByPredicate : Optional.empty();
     }
 
 }
