@@ -40,8 +40,7 @@ public class SimpleTree<E> implements Tree<E> {
     }
     @Override
     public Optional<Node<E>> findBy(E value) {
-        Optional<Node<E>> resultFindByPredicate = findByPredicate(eNode -> eNode.value.equals(value));
-        return  resultFindByPredicate.isPresent() ? resultFindByPredicate : Optional.empty();
+        return  findByPredicate(eNode -> eNode.value.equals(value));
     }
 
 }
