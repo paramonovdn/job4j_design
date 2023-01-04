@@ -8,90 +8,31 @@ public class Analize {
         int added = 0;
         int changed = 0;
         int deleted = 0;
-        /**
-         * Из current вычитаем previous, получаем currentMinusPrevious - остаются добавленные или измененные элементы
-         */
-        Set<User> currentMinusPrevious = new HashSet<>();
-        currentMinusPrevious.addAll(current);
-        currentMinusPrevious.removeAll(previous);
 
-        /**
-         * Из previous вычитаем current, получаем previousMinusCurrent - остаются удаленные элементы
-         */
-        Set<User> previousMinusCurrent = new HashSet<>();
-        previousMinusCurrent.addAll(previous);
-        previousMinusCurrent.removeAll(current);
+        Map<Integer, User> previosMap = new HashMap<Integer, User>();
+        Map<Integer, User> currentMap = new HashMap<Integer, User>();
 
-
-        /**
-         * В дальнейшем работаем вместо сетов с данными мапами
-         */
-        Map<Integer, String> previosMap = new HashMap<Integer, String>();
-        Map<Integer, String> currentMap = new HashMap<Integer, String>();
-        Map<Integer, String> currentMinusPreviosMap = new HashMap<Integer, String>();
-        Map<Integer, String> previousMinusCurrentMap = new HashMap<Integer, String>();
-
-        /**
-         * Сет previous помещаем в мапу previosMap,
-         * в дальнейшем это поможет понять измененный элемент или добавленный
-         */
-        Iterator<User> itPrevious = previous.iterator();
-        while (itPrevious.hasNext()) {
-            User user  = itPrevious.next();
-            previosMap.put(user.getId(), user.getName());
+        for (User user : previous) {
+            previosMap.put(user.getId(), user);
         }
 
-        /**
-         * Сет current помещаем в мапу currentMap,
-         * в дальнейшем это поможет понять удаленный ли элемент
-         */
-        Iterator<User> itCurrent = current.iterator();
-        while (itCurrent.hasNext()) {
-            User user  = itCurrent.next();
-            currentMap.put(user.getId(), user.getName());
+        for (User user : current) {
+            currentMap.put(user.getId(), user);
         }
 
-
-        /**
-         * Сет currentMinusPrevious помещаем в мапу currentMinusPreviosMap,
-         * в дальнейшем это поможет понять измененный элемент или добавленный
-         */
-        Iterator<User> itCurrentMinusPrevious = currentMinusPrevious.iterator();
-        while (itCurrentMinusPrevious.hasNext()) {
-            User user  = itCurrentMinusPrevious.next();
-            currentMinusPreviosMap.put(user.getId(), user.getName());
-        }
-        /**
-         * Сет previousMinusCurrent помещаем в мапу previousMinusCurrentMap,
-         * в дальнейшем это поможет найти удаленный ли элемент
-         */
-        Iterator<User> itPreviousMinusCurrent = previousMinusCurrent.iterator();
-        while (itPreviousMinusCurrent.hasNext()) {
-            User user  = itPreviousMinusCurrent.next();
-            previousMinusCurrentMap.put(user.getId(), user.getName());
-        }
-
-
-        /**
-         * Выясняем количество добавленных и измененных элементов
-         */
-        Iterator<Map.Entry<Integer, String>> itr = currentMinusPreviosMap.entrySet().iterator();
-        while (itr.hasNext()) {
-            Integer key = itr.next().getKey();
-            if (previosMap.containsKey(key) && !previosMap.get(key).equals(currentMinusPreviosMap.get(key))) {
-                changed++;
-            }
+        for (Map.Entry<Integer, User> entry : currentMap.entrySet()) {
+            Integer key = entry.getKey();
+            User value = entry.getValue();
             if (!previosMap.containsKey(key)) {
                 added++;
             }
+            if (previosMap.containsKey(key) && !previosMap.get(key).equals(value)) {
+                changed++;
+            }
         }
 
-        /**
-         * Выясняем количество удаленных элементов
-         */
-        Iterator<Map.Entry<Integer, String>> itr2 = previousMinusCurrentMap.entrySet().iterator();
-        while (itr2.hasNext()) {
-            Integer key = itr2.next().getKey();
+        for (Map.Entry<Integer, User> entry : previosMap.entrySet()) {
+            Integer key = entry.getKey();
             if (!currentMap.containsKey(key)) {
                 deleted++;
             }
