@@ -1,6 +1,8 @@
 package ru.job4j.io;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
@@ -16,11 +18,11 @@ public class EvenNumberFile {
                 boolean rsl = Integer.parseInt(line) % 2 == 0;
                 if (rsl) {
                     System.out.println(line + " -четное число");
-                } else  {
+                } else {
                     System.out.println(line + " -нечетное число");
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
