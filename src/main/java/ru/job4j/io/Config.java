@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class Config {
     private final String path;
     private final Map<String, String> values = new HashMap<String, String>();
-
     public Config(final String path) {
         this.path = path;
     }
@@ -37,11 +36,9 @@ public class Config {
             e.printStackTrace();
         }
     }
-
     public String value(String key) {
         return this.values.get(key);
     }
-
     @Override
     public String toString() {
         StringJoiner out = new StringJoiner(System.lineSeparator());
@@ -52,7 +49,6 @@ public class Config {
         }
         return out.toString();
     }
-
     public static void main(String[] args) {
         System.out.println(new Config("data/pair_with_comments_and_empty_line.properties"));
     }

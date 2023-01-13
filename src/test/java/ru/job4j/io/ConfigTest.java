@@ -6,7 +6,6 @@ import ru.job4j.assertj.SimpleModel;
 import static org.assertj.core.api.Assertions.*;
 
 class ConfigTest {
-
     @Test
     void whenPairWithCommentAndEmptyLines() {
         String path = "./data/pair_with_comments_and_empty_line.properties";
@@ -18,7 +17,6 @@ class ConfigTest {
         assertThat(config.value("hibernate.connection.username")).isEqualTo("postgres");
         assertThat(config.value("hibernate.connection.password")).isEqualTo("password");
     }
-
     @Test
     void whenPairWithDoubleEquallySimbol() {
         String path = "./data/pair_with_double_equally_simbol.properties";
@@ -30,7 +28,6 @@ class ConfigTest {
         assertThat(config.value("hibernate.connection.username")).isEqualTo("postgres");
         assertThat(config.value("hibernate.connection.password")).isEqualTo("password");
     }
-
     @Test
     void whenPairOnlyEqually() {
         String path = "./data/pair_with_only_equally_simbol.properties";
@@ -38,7 +35,6 @@ class ConfigTest {
         assertThatThrownBy(() -> config.load())
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
     @Test
     void whenPairWithoutEquallySimbol() {
         String path = "./data/pair_without_equally_simbol.properties";
@@ -46,7 +42,6 @@ class ConfigTest {
         assertThatThrownBy(() -> config.load())
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
     @Test
     void whenPairWithoutKey() {
         String path = "./data/pair_without_equally_simbol.properties";
@@ -54,7 +49,6 @@ class ConfigTest {
         assertThatThrownBy(() -> config.load())
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
     @Test
     void whenPairWithoutValues() {
         String path = "./data/pair_without_equally_simbol.properties";
@@ -62,6 +56,4 @@ class ConfigTest {
         assertThatThrownBy(() -> config.load())
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-
 }
