@@ -1,7 +1,6 @@
 package ru.job4j.io;
 
 import org.junit.jupiter.api.Test;
-import ru.job4j.assertj.SimpleModel;
 
 import static org.assertj.core.api.Assertions.*;
 
