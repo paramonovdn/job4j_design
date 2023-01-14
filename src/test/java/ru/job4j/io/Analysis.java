@@ -30,7 +30,7 @@ public class Analysis {
 
         try (PrintWriter out = new PrintWriter(new FileWriter(target, true))) {
             out.println(fileFormat);
-            for (String l : allTimeLine){
+            for (String l : allTimeLine) {
                 out.println(l);
             }
         } catch (IOException e) {
