@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class ConfigTest {
     @Test
     void whenPairWithCommentAndEmptyLines() {
-        String path = "./data/pair_with_comments_and_empty_line.properties";
+        String path = "./data/pair_with_comments_and_empty_lines.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.dialect")).isEqualTo("org.hibernate.dialect.PostgreSQLDialect");
@@ -43,14 +43,14 @@ class ConfigTest {
     }
     @Test
     void whenPairWithoutKey() {
-        String path = "./data/pair_without_equally_simbol.properties";
+        String path = "./data/pair_without_key.properties";
         Config config = new Config(path);
         assertThatThrownBy(() -> config.load())
                 .isInstanceOf(IllegalArgumentException.class);
     }
     @Test
     void whenPairWithoutValues() {
-        String path = "./data/pair_without_equally_simbol.properties";
+        String path = "./data/pair_without_value.properties";
         Config config = new Config(path);
         assertThatThrownBy(() -> config.load())
                 .isInstanceOf(IllegalArgumentException.class);

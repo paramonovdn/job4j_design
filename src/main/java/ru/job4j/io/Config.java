@@ -19,17 +19,17 @@ public class Config {
                 if (line.contains("#") || line.isEmpty()) {
                     continue;
                 }
-                if (line.contains("=")) {
+                if (!line.contains("=")) {
+                    throw new IllegalArgumentException();
+                } else {
                     int simbolPosition = line.indexOf("=");
                     String key = line.substring(0, simbolPosition);
                     String value = line.substring(simbolPosition + 1, line.length());
-                    if (!key.isEmpty() && !value.isEmpty()) {
-                        values.put(key, value);
-                    } else {
+                    if (key.isEmpty() || value.isEmpty()) {
                         throw new IllegalArgumentException();
+                    } else {
+                        values.put(key, value);
                     }
-                } else {
-                    throw new IllegalArgumentException();
                 }
             }
         } catch (IOException e) {
@@ -50,7 +50,7 @@ public class Config {
         return out.toString();
     }
     public static void main(String[] args) {
-        System.out.println(new Config("data/pair_with_comments_and_empty_line.properties"));
+        System.out.println(new Config("data/pair_with_comments_and_empty_lines.properties"));
     }
 
 }
