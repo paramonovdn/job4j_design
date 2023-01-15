@@ -27,7 +27,6 @@ public class Analysis {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         try (PrintWriter out = new PrintWriter(new FileWriter(target, true))) {
             out.println(fileFormat);
             for (String l : allTimeLine) {
