@@ -79,7 +79,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 }
                 return container[index++];
             }
-
         };
     }
 }
