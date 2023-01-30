@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class SearchFiles implements FileVisitor<Path> {
-    Predicate<Path> condition;
-    List<Path> targetFiles = new LinkedList<>();
+    private Predicate<Path> condition;
+    private List<Path> targetFiles = new LinkedList<>();
     public SearchFiles(Predicate<Path> condition) {
         this.condition = condition;
     }
@@ -24,7 +24,7 @@ public class SearchFiles implements FileVisitor<Path> {
     }
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (Files.isRegularFile(file) && condition.test(file)) {
+        if (condition.test(file)) {
             targetFiles.add(file);
         }
         return CONTINUE;
