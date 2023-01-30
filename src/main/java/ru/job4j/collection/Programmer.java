@@ -30,31 +30,32 @@ public class Programmer {
 
     @Override
     public int hashCode() {
-       // return Objects.hash(name, age, position, salary);
+        /**
+        * return Objects.hash(name, age, position, salary);
+        */
         int result = name.hashCode();
         result = 31 * result + Byte.hashCode(age);
         result = 31 * result + position.hashCode();
         result = 31 * result + Integer.hashCode(salary);
         return result;
     }
-/*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Programmer that = (Programmer) o;
-
-        if (salary != that.salary) return false;
-        return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = position != null ? position.hashCode() : 0;
-        result = 31 * result + salary;
-        return result;
-    }
-
+/**
+*    @Override
+*    public boolean equals(Object o) {
+*        if (this == o) return true;
+*        if (o == null || getClass() != o.getClass()) return false;
+*
+*        Programmer that = (Programmer) o;
+*
+*        if (salary != that.salary) return false;
+*        return Objects.equals(position, that.position);
+*    }
+*
+*   @Override
+*    public int hashCode() {
+*        int result = position != null ? position.hashCode() : 0;
+*        result = 31 * result + salary;
+*        return result;
+*    }
 */
 }

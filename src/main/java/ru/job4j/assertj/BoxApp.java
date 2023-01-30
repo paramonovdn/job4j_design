@@ -8,14 +8,12 @@ public class BoxApp {
 
 
 
-
-      //  Iterator<Integer> it  = new EvenNumbersIterator(new int[] {4, 2, 1, 1});
-
-
-
-   /*     System.out.println(it.next());
-        System.out.println(it.next());
-        System.out.println(it.next());*/
+       /**
+       *Iterator<Integer> it  = new EvenNumbersIterator(new int[] {4, 2, 1, 1});
+       *System.out.println(it.next());
+       *System.out.println(it.next());
+       *System.out.println(it.next());
+       */
 
         Stream.of("dd2", "aa2", "bb1", "bb3", "cc4")
                 .map(s -> {
@@ -27,13 +25,5 @@ public class BoxApp {
                     return s.startsWith("A");
                 })
                 .forEach(s -> System.out.println("forEach: " + s));
-
-
-
-
-
-
-
-
     }
 }
