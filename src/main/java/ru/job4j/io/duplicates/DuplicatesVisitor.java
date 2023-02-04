@@ -18,7 +18,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         List<Path> pathes = new LinkedList<>();
         pathes.add(path);
         List<Path> value = duplicates.putIfAbsent(fileProperty, pathes);
-        if (value != null){
+        if (value != null) {
             pathes = duplicates.get(fileProperty);
             pathes.add(path);
             duplicates.put(fileProperty, pathes);
