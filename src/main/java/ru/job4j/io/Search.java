@@ -29,10 +29,10 @@ public class Search {
         String argument1 = args[0];
         String argument2 = args[1];
         Path path = Paths.get(argument1);
-        if (!path.toFile().isDirectory() || argument1.length() == 0) {
+        if (!path.toFile().isDirectory()) {
             throw new IllegalArgumentException(String.format("The directory is not defined: %s", argument1));
         }
-        if (!argument2.startsWith(".") || argument2.length() == 0) {
+        if (!argument2.startsWith(".") || argument2.length() < 2) {
             throw new IllegalArgumentException(String.format("Illegal file extension- %s", argument2));
         }
     }
