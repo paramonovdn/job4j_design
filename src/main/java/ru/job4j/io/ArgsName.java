@@ -15,44 +15,42 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        argValidation(args);
         for (String arg: args) {
-            int simbolPosition = arg.indexOf("=");
-            String key = arg.substring(1, simbolPosition);
-            String value = arg.substring(simbolPosition + 1, arg.length());
+            int symbolPosition = arg.indexOf("=");
+            argValidation(arg, symbolPosition);
+            String key = arg.substring(1, symbolPosition);
+            String value = arg.substring(symbolPosition + 1, arg.length());
             values.put(key, value);
         }
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException(String.format("No arguments passed."));
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
     }
 
-    private static void argValidation(String[] arguments) {
-        if (arguments.length == 0) {
-            throw new IllegalArgumentException(String.format("No arguments passed"));
-        }
-        for (int i = 0; i < arguments.length; i++) {
-            if (!arguments[i].contains("=")) {
-                throw new IllegalArgumentException(String.format("In pair number %s missing separator \"=\"."
-                        + " Invalid pair- %s.", i + 1, arguments[i]));
+    private static void argValidation(String arg, int symbolPosition) {
+            if (!arg.contains("=")) {
+                throw new IllegalArgumentException(String.format("In pair missing separator \"=\"."
+                        + " Invalid pair: %s.", arg));
             } else {
-                int simbolPosition = arguments[i].indexOf("=");
-                String key = arguments[i].substring(0, simbolPosition);
-                String value = arguments[i].substring(simbolPosition + 1, arguments[i].length());
+                String key = arg.substring(0, symbolPosition);
+                String value = arg.substring(symbolPosition + 1, arg.length());
                 if (!key.startsWith("-")) {
                     throw new IllegalArgumentException(String.format("The key must start with \"-\"."
-                            + " Invalid pair: %s", arguments[i]));
+                            + " Invalid pair: %s", arg));
                 }
-                key = arguments[i].substring(1, simbolPosition);
+                key = arg.substring(1, symbolPosition);
                 if (key.isEmpty() || value.isEmpty()) {
-                    throw new IllegalArgumentException(String.format("Key or values in pair number- %s is empty,"
-                            + " Invalid pair: %s", i + 1, arguments[i]));
+                    throw new IllegalArgumentException(String.format("Key or values in pair is empty."
+                            + " Invalid pair: %s", arg));
                 }
             }
-        }
+
     }
 
     public static void main(String[] args) {
