@@ -23,10 +23,10 @@ public class ConsoleChat {
 
         while (!Objects.equals(msg, OUT)) {
             msg = in.nextLine();
-            if (msg.length()<1) {
+            if (msg.length() < 1) {
                 continue;
             }
-            String botMsg = readPhrases().get((int)(Math.random() * readPhrases().size()));
+            String botMsg = readPhrases().get((int) (Math.random() * readPhrases().size()));
 
             if (msg.equals(OUT)) {
                 msgForLog.add("user:-" + msg);
@@ -36,7 +36,7 @@ public class ConsoleChat {
             }
             if (msg.equals(STOP)) {
                 while (!msg.equals(CONTINUE)) {
-                    msg =in.nextLine();
+                    msg = in.nextLine();
                     if (msg.equals(CONTINUE)) {
                         break;
                     }
@@ -73,7 +73,7 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat( "C:\\projects\\job4j_design\\data\\ConsoleChatLogs.txt",
+        ConsoleChat cc = new ConsoleChat("C:\\projects\\job4j_design\\data\\ConsoleChatLogs.txt",
                 "C:\\projects\\job4j_design\\data\\ConsoleChat.txt");
         cc.run();
     }
