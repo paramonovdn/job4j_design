@@ -18,34 +18,41 @@ public class ConsoleChat {
 
     public void run() {
         List<String> msgForLog = new ArrayList<>();
+        List<String> botAnswers = readPhrases();
         Scanner in = new Scanner(System.in);
         String msg = null;
 
-        while (!Objects.equals(msg, OUT)) {
+        while (!OUT.equals(msg)) {
             msg = in.nextLine();
             if (msg.length() < 1) {
                 continue;
             }
-            String botMsg = readPhrases().get((int) (Math.random() * readPhrases().size()));
+            String botMsg = botAnswers.get((int) (Math.random() * botAnswers.size()));
 
-            if (msg.equals(OUT)) {
+            if (OUT.equals(msg)) {
                 msgForLog.add("user:-" + msg);
                 saveLog(msgForLog);
                 msgForLog = new ArrayList<>();
                 continue;
             }
-            if (msg.equals(STOP)) {
-                while (!msg.equals(CONTINUE)) {
+            if (STOP.equals(msg)) {
+                msgForLog.add("user:-" + msg);
+                while (!CONTINUE.equals(msg)) {
                     msg = in.nextLine();
-                    if (msg.equals(CONTINUE)) {
+                    if (CONTINUE.equals(msg)) {
                         break;
+                    }
+                    if (OUT.equals(msg)) {
+                        msgForLog.add("user:-" + msg);
+                        saveLog(msgForLog);
+                        System.exit(0);
                     }
                     msgForLog.add("user:-" + msg);
                     saveLog(msgForLog);
                     msgForLog = new ArrayList<>();
                 }
             }
-            System.out.print(botMsg);
+            System.out.println(botMsg);
             msgForLog.add("user:-" + msg);
             msgForLog.add("bot:-" + botMsg);
             saveLog(msgForLog);
@@ -57,7 +64,7 @@ public class ConsoleChat {
     private List<String> readPhrases() {
         List<String> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers, Charset.forName("UTF-8")))) {
-            br.lines().map(s -> s + System.lineSeparator()).forEach(list::add);
+            br.lines().forEach(list::add);
         } catch (IOException e) {
             e.printStackTrace();
         }
