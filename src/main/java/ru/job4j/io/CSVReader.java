@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -72,7 +69,7 @@ public class CSVReader {
 
 
 
-    public static void argValidation(ArgsName argsName) {
+    public static void argValidation(ArgsName argsName) throws FileNotFoundException {
         String argument1 = argsName.get("path");
         String argument2 = argsName.get("delimiter");
         String argument3 = argsName.get("out");
@@ -80,17 +77,22 @@ public class CSVReader {
         if (!Paths.get(argument1).toFile().isFile()) {
             throw new IllegalArgumentException(String.format("File not found: %s", argument1));
         }
-        if (!argument2.equals(";")) {
+        if (!";".equals(argument2)) {
             throw new IllegalArgumentException(String.format("The delimiter is not defined- %s", argument2));
         }
 
         List<String> arg3 = List.of(argument3.split("\\."));
-        if (!argument3.equals("stdout") && (arg3.get(0) == "" || arg3.size() != 2 || !arg3.get(1).equals("csv"))) {
+        if (!"stdout".equals(argument3) && ((arg3.size() != 2 || "".equals(arg3.get(0))) || !"csv".equals(arg3.get(1)))) {
             throw new IllegalArgumentException(String.format("Check the out parameter- %s", argument3));
         }
 
-        if (argument4 == null) {
-            throw new NullPointerException(String.format("Filter argument is null- %s", argument4));
+        FileInputStream inputStream = new FileInputStream(argument1);
+        Scanner scanner = new Scanner(inputStream);
+        List<String> firstCSVline = List.of(scanner.nextLine().split(argument2));
+        scanner.close();
+        List<String> arg4 = List.of(argument4.split(","));
+        if (!firstCSVline.containsAll(arg4)) {
+            throw new NullPointerException(String.format("Wrong filter values- %s", argument4));
         }
     }
 
