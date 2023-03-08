@@ -7,10 +7,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
-import static java.nio.file.FileVisitResult.TERMINATE;
 
 public class PrintFiles implements FileVisitor<Path> {
     String prevPathName = null;

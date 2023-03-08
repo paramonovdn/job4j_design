@@ -11,9 +11,9 @@ public class AttributesUsage {
         /*
         *создаётся файл в корне проекта, создается представление из атрибутов этого файла и получаются сами атрибуты:
          */
-        Path file1 = Path.of("Attributes.txt");
-        Files.createFile(file1);
-        BasicFileAttributeView attrView = Files.getFileAttributeView(file1, BasicFileAttributeView.class);
+        Path file = Path.of("Attributes.txt");
+        Files.createFile(file);
+        BasicFileAttributeView attrView = Files.getFileAttributeView(file, BasicFileAttributeView.class);
         BasicFileAttributes attributes = attrView.readAttributes();
 
         /*
@@ -21,8 +21,8 @@ public class AttributesUsage {
         * статическими. Например, чтобы получить атрибуты файла, не обязательно получать представление требуемой группы
         * атрибутов, можно использовать более быстрый вариант с помощью вызова статического метода Files.readAttributes():
          */
-        Path file = Path.of("Attributes.txt");
-        Files.createFile(file);
+      //  Path file = Path.of("Attributes.txt");
+      //  Files.createFile(file);
         BasicFileAttributes attributes1 = Files.readAttributes(file, BasicFileAttributes.class);
         System.out.println("Это обычный файл? " + attributes.isRegularFile());
         System.out.println("Это директория? " + attributes.isDirectory());
