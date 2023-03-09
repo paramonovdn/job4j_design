@@ -9,17 +9,17 @@ public class EchoServer {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
-                boolean flag = false;
+                boolean closeComand = false;
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
                         if (str.contains("msg=Bye")) {
-                            flag = true;
+                            closeComand = true;
                         }
                         System.out.println(str);
                     }
-                    if (!flag) {
+                    if (!closeComand) {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         out.write("Hello, dear friend.".getBytes());
                         out.flush();
