@@ -21,6 +21,7 @@ public class EchoServer {
                     }
                     if (!flag) {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                        out.write("Hello, dear friend.".getBytes());
                         out.flush();
                     } else {
                         out.write("HTTP/1.1 499 Client Closed Request\r\n\r\n".getBytes());
