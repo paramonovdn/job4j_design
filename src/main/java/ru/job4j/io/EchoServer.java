@@ -27,7 +27,7 @@ public class EchoServer {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         out.write(userCommand.getBytes());
                         out.flush();
-                    }else if ("Exit".equals(userCommand)) {
+                    } else if ("Exit".equals(userCommand)) {
                         out.write("HTTP/1.1 499 Client Closed Request\r\n\r\n".getBytes());
                         out.write(userCommand.getBytes());
                         out.flush();
