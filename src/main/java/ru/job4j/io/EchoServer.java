@@ -23,14 +23,18 @@ public class EchoServer {
                         }
                         System.out.println(str);
                     }
-                    if ("Exit".equals(userCommand)) {
+                    if ("Hello".equals(userCommand)) {
+                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                        out.write(userCommand.getBytes());
+                        out.flush();
+                    }else if ("Exit".equals(userCommand)) {
                         out.write("HTTP/1.1 499 Client Closed Request\r\n\r\n".getBytes());
                         out.write(userCommand.getBytes());
                         out.flush();
                         server.close();
                     } else {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                        out.write(userCommand.getBytes());
+                        out.write("What".getBytes());
                         out.flush();
                     }
                 }
