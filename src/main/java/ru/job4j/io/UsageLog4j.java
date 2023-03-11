@@ -11,12 +11,12 @@ public class UsageLog4j {
        byte anyByte = 127;
        short anyShort = 32767;
        int anyInt = 2147483647;
-       long anyLong = 654654654l;
+       long anyLong = 654654654L;
        float anyFloat = 5465468746868468f;
        double anyDooble = 6546546.54d;
        char anyChar = 'a';
        boolean anyBoolean = true;
-       LOG.debug("We have 8 examples of primitive variables: byte: {}, short: {}, int: {}, long: {}, float: {}, double: {}," +
-               " char: {}, boolean: {}.", anyByte, anyShort, anyInt, anyLong, anyFloat, anyDooble, anyChar, anyBoolean);
+       LOG.debug("We have 8 examples of primitive variables: byte: {}, short: {}, int: {}, long: {}, float: {}, double: {},"
+               +               " char: {}, boolean: {}.", anyByte, anyShort, anyInt, anyLong, anyFloat, anyDooble, anyChar, anyBoolean);
     }
 }
