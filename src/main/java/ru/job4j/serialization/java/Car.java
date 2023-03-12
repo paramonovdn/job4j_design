@@ -50,7 +50,7 @@ public class Car {
                         + "\"brand\":Opel,"
                         + "\"engine\":"
                         + "{"
-                        + "\"engine\":\"C30SE\""
+                        + "\"model\":\"C30SE\""
                         + "},"
                         + "\"options\":"
                         + "[\"conditioner\",\"2 airbag\"]"
