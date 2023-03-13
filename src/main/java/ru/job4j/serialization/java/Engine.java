@@ -8,8 +8,13 @@ public class Engine {
     @XmlAttribute
     private String model;
     public Engine() { }
+
     public Engine(String model) {
         this.model = model;
+    }
+
+    public String getModel() {
+        return model;
     }
 
     @Override
