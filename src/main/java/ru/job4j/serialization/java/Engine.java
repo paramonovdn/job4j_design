@@ -1,8 +1,13 @@
 package ru.job4j.serialization.java;
 
-public class Engine {
-    private final String model;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "contact")
+public class Engine {
+    @XmlAttribute
+    private String model;
+    public Engine() { }
     public Engine(String model) {
         this.model = model;
     }

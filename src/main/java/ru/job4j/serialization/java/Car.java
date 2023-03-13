@@ -3,14 +3,29 @@ package ru.job4j.serialization.java;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Arrays;
-
+@XmlRootElement(name = "car")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Car {
-    private final boolean passanger;
-    private final int yearOfProduction;
-    private final String brand;
-    private final Engine engine;
-    private final String[] options;
+    @XmlAttribute
+    private boolean passanger;
+    @XmlAttribute
+    private int yearOfProduction;
+    @XmlAttribute
+    private String brand;
+
+    private Engine engine;
+    @XmlElementWrapper(name = "options")
+    @XmlElement(name = "option")
+    private String[] options;
+
+    public Car() { }
 
     public Car(boolean passanger, int yearOfProduction, String brand, Engine engine, String[] options) {
         this.passanger = passanger;
@@ -31,31 +46,41 @@ public class Car {
                + '}';
     }
 
-    public static void main(String[] args) {
-        final Car car = new Car(true, 2019, "Opel", new Engine("C30SE"),
-                 new String[] {"conditioner", "2 airbag"});
+    public static void main(String[] args) throws Exception {
+        Car car = new Car(true, 2019, "Opel", new Engine("C30SE"),
+                new String[] {"conditioner", "2 airbag"});
         /*
-        * Преобразуем объект person в json-строку.
-          */
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(car));
-
-        /*
-        *Модифицируем json-строку в объект
+        *Получаем контекст для доступа к АПИ
         */
-        final String carJson =
-                "{"
-                        + "\"passanger\":true,"
-                        + "\"yearOfProduction\":2019,"
-                        + "\"brand\":Opel,"
-                        + "\"engine\":"
-                        + "{"
-                        + "\"model\":\"C30SE\""
-                        + "},"
-                        + "\"options\":"
-                        + "[\"conditioner\",\"2 airbag\"]"
-                        + "}";
-        final Car personMod = gson.fromJson(carJson, Car.class);
-        System.out.println(personMod);
+        JAXBContext context = JAXBContext.newInstance(Car.class);
+        /*
+         *Создаем сериализатор
+         */
+        Marshaller marshaller = context.createMarshaller();
+        /*
+        *Указываем, что нам нужно форматирование
+        */
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        String xml = "";
+        try (StringWriter writer = new StringWriter()) {
+            /*
+            *Сериализуем
+            */
+            marshaller.marshal(car, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
+        }
+        /*
+        *Для десериализации нам нужно создать десериализатор
+        */
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        try (StringReader reader = new StringReader(xml)) {
+            /*
+            *десериализуем
+            */
+            Car result = (Car) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        }
+
     }
 }
