@@ -1,19 +1,24 @@
 package ru.job4j.io.searcher;
 
-import ru.job4j.io.searcher.ArgsName;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Searcher {
-    public static String searchFileName;
-    public static String searchType;
+    private static String searchFileName;
+
+    private static String searchType;
+
+    public static String getSearchFileName() {
+        return searchFileName;
+    }
+
+    public static String getSearchType() {
+        return searchType;
+    }
 
     public static void argValidation(ArgsName argsName) {
         String argument1 = argsName.get("d");
@@ -45,7 +50,7 @@ public class Searcher {
         String startDirectory = argsName.get("d");
         searchFileName = argsName.get("n");
         searchType = argsName.get("t");
-        String logFile = "C:\\projects\\job4j_design\\" + argsName.get("o");
+        String logFile = argsName.get("o");
 
         Files.walkFileTree(Path.of(startDirectory), new MySimpleFileVisitor());
 
