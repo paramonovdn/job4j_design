@@ -5,7 +5,6 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
-
 public class MySimpleFileVisitor extends SimpleFileVisitor<Path> {
     public static List<String> foundFiles = new ArrayList<>();
     @Override
